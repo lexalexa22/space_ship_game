@@ -149,6 +149,7 @@ class Spaceship:
         Spaceship.checking_hitting_with_ends(self)
 
     def checking_hitting_with_ends(self):
+		"""dont allow the spaceship get off the borders of the screen"""
         if self.x <= 25:
             self.x = 26
         if self.x >= 695:
@@ -165,6 +166,8 @@ class Enemy:
     def __init__(self, x, y):
         self.x = x
         self.y = y
+		
+		"""making a list with 299 False values and only 1 True value. It will be used in fire-function (if True --> Fire)"""
         self.fire_or_not = []
         for i in range(300):
             if i == 50:
@@ -173,7 +176,7 @@ class Enemy:
                 self.fire_or_not.append(False)
 
     def draw(self):
-        self.head = (self.x+5, self.y+20)
+        self.head = (self.x+5, self.y+20)  #  coordinate of the head of the enemy
         coordinates = (
             (self.x, self.y),  #  first coordinate
             self.head,
@@ -182,6 +185,7 @@ class Enemy:
         pygame.draw.polygon(screen, 'white', (coordinates))
 
     def fire(self):
+		"""enemy makes a shot only if True will be chosed from a list of values"""
         if random.choice(self.fire_or_not) is True:
             bullets_for_enemies.append(Bullet_enemy(self.head[0], self.head[1]))
 
